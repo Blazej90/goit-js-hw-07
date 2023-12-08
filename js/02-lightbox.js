@@ -1,40 +1,8 @@
 import { galleryItems } from "./gallery-items.js";
+// Change code below this line
 
 const galleryContainer = document.querySelector("ul.gallery");
 let lightbox;
-
-galleryContainer.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  const clickedElement = event.target;
-  if (clickedElement.nodeName !== "IMG") return;
-
-  const imageSrc = clickedElement.dataset.source;
-
-  if (!lightbox) {
-    lightbox = new SimpleLightbox(".gallery__item-link", {
-      captionsData: "alt",
-      captionDelay: 250,
-    });
-  }
-
-  const overlay = document.createElement("div");
-  overlay.className = "overlay";
-  document.body.appendChild(overlay);
-
-  lightbox.open({
-    items: galleryItems.map((item) => ({
-      src: item.original,
-      title: item.description,
-    })),
-    onClose: () => {
-      overlay.remove();
-      removeKeyboardListener();
-    },
-  });
-
-  addKeyboardListener();
-});
 
 const addKeyboardListener = () => {
   document.addEventListener("keydown", handleKeyPress);
@@ -65,3 +33,8 @@ const images = galleryItems.map((item) => {
 });
 
 galleryContainer.insertAdjacentHTML("beforeend", images.join(""));
+
+lightbox = new SimpleLightbox(".gallery__item-link", {
+  captionsData: "alt",
+  captionDelay: 250,
+});
