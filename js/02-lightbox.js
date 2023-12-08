@@ -4,23 +4,23 @@ import { galleryItems } from "./gallery-items.js";
 const galleryContainer = document.querySelector("ul.gallery");
 let lightbox;
 
-const addKeyboardListener = () => {
-  document.addEventListener("keydown", handleKeyPress);
-};
+// const addKeyboardListener = () => {
+//   document.addEventListener("keydown", handleKeyPress);
+// };
 
-const removeKeyboardListener = () => {
-  document.removeEventListener("keydown", handleKeyPress);
-};
+// const removeKeyboardListener = () => {
+//   document.removeEventListener("keydown", handleKeyPress);
+// };
 
-const handleKeyPress = (event) => {
-  if (event.key === "Escape" && lightbox) {
-    lightbox.close();
-    removeKeyboardListener();
-  }
-};
+// const handleKeyPress = (event) => {
+//   if (event.key === "Escape" && lightbox) {
+//     lightbox.close();
+//     removeKeyboardListener();
+//   }
+// };
 
 const images = galleryItems.map((item) => {
-  return `<li class="gallery__item">
+  return `<div class="gallery__item">
       <a class="gallery__item-link" href="${item.original}">
           <img
               class="gallery__image"
@@ -29,7 +29,7 @@ const images = galleryItems.map((item) => {
               alt="${item.description}"
           />
       </a>
-  </li>`;
+  </div>`;
 });
 
 galleryContainer.insertAdjacentHTML("beforeend", images.join(""));
