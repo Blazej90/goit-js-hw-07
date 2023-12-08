@@ -6,11 +6,17 @@ let lightboxInstance;
 
 galleryContainer.addEventListener("click", (event) => {
   event.preventDefault();
-  if (event.target.nodeName !== "IMG") return;
-  const imageSrc = event.target.dataset.source;
+
+  const clickedElement = event.target;
+  if (clickedElement.nodeName !== "IMG") return;
+
+  const imageSrc = clickedElement.dataset.source;
+  const largeImageSrc = clickedElement.parentNode.href;
+
   lightboxInstance = basicLightbox.create(
     `<img src="${imageSrc}" width="800" height="600">`
   );
+
   lightboxInstance.show();
   addKeyboardListener();
 });
@@ -31,7 +37,7 @@ const handleKeyPress = (event) => {
 };
 
 const images = galleryItems.map((item) => {
-  return `<li class="gallery__item">
+  return `<div class="gallery__item">
       <a class="gallery__link" href="${item.original}">
           <img
               class="gallery__image"
@@ -40,7 +46,7 @@ const images = galleryItems.map((item) => {
               alt="${item.description}"
           />
       </a>
-  </li>`;
+  </div>`;
 });
 
 galleryContainer.insertAdjacentHTML("beforeend", images.join(""));
